@@ -8,20 +8,20 @@
 import Foundation
 import Solana
 
-class KeypairIdentityDriver: IdentityDriver {
+public class KeypairIdentityDriver: IdentityDriver {
 
-    internal var publicKey: PublicKey
+    public var publicKey: PublicKey
     private let secretKey: Data
     private let account: Account
     private let solanaRPC: Api
-    init(solanaRPC: Api, account: Account) {
+    public  init(solanaRPC: Api, account: Account) {
         self.solanaRPC = solanaRPC
         self.publicKey = account.publicKey
         self.secretKey = account.secretKey
         self.account = account
     }
 
-    func sendTransaction(serializedTransaction: String, onComplete: @escaping(Result<TransactionID, IdentityDriverError>) -> Void) {
+    public func sendTransaction(serializedTransaction: String, onComplete: @escaping(Result<TransactionID, IdentityDriverError>) -> Void) {
         self.solanaRPC.sendTransaction(serializedTransaction: serializedTransaction) { result in
             switch result {
             case .success(let transactionID):
@@ -32,13 +32,13 @@ class KeypairIdentityDriver: IdentityDriver {
         }
     }
 
-    func signTransaction(transaction: Transaction, onComplete: @escaping (Result<Transaction, IdentityDriverError>) -> Void) {
+    public func signTransaction(transaction: Transaction, onComplete: @escaping (Result<Transaction, IdentityDriverError>) -> Void) {
         var transaction = transaction
         transaction.sign(signers: [account])
             .onSuccess { onComplete(.success(transaction))}
     }
 
-    func signAllTransactions(transactions: [Transaction], onComplete: @escaping (Result<[Transaction?], IdentityDriverError>) -> Void) {
+    public func signAllTransactions(transactions: [Transaction], onComplete: @escaping (Result<[Transaction?], IdentityDriverError>) -> Void) {
         var mutableTransactions: [Transaction?] = []
         transactions.forEach { transaction in
             var mutableTransaction = transaction

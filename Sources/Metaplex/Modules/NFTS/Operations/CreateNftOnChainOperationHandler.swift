@@ -23,18 +23,32 @@ public enum AccountState {
 }
 
 public struct CreateNftInput {
-    let mintAccountState: AccountState
-    let account: Account
-    let name: String
-    let symbol: String?
-    let uri: String
-    let sellerFeeBasisPoints: UInt16
-    let hasCreators: Bool
-    let addressCount: UInt32
-    let creators: [MetaplexCreator]
-    let collection: MetaplexCollection? = nil
-    let uses: MetaplexUses? = nil
-    let isMutable: Bool
+    public var mintAccountState: AccountState
+    public var account: Account
+    public var name: String
+    public var symbol: String?
+    public var uri: String
+    public var sellerFeeBasisPoints: UInt16
+    public var hasCreators: Bool
+    public var addressCount: UInt32
+    public var creators: [MetaplexCreator]
+    public var collection: MetaplexCollection? = nil
+    public var uses: MetaplexUses? = nil
+    public var isMutable: Bool
+    
+    public init(mintAccountState: AccountState, account: Account, name: String, symbol: String?, uri: String, sellerFeeBasisPoints: UInt16, hasCreators: Bool, addressCount: UInt32, creators: [MetaplexCreator], isMutable: Bool) {
+        self.mintAccountState = mintAccountState
+        self.account = account
+        self.name = name
+        self.symbol = symbol
+        self.uri = uri
+        self.sellerFeeBasisPoints = sellerFeeBasisPoints
+        self.hasCreators = hasCreators
+        self.addressCount = addressCount
+        self.creators = creators
+        self.isMutable = isMutable
+    }
+
 }
 
 typealias CreateNftOperation = OperationResult<CreateNftInput, OperationError>
