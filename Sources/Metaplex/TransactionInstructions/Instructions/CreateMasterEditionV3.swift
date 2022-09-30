@@ -9,18 +9,31 @@ import Foundation
 import Solana
 
 public struct CreateMasterEditionV3InstructionAccounts {
+    public init(edition: PublicKey, mint: PublicKey, updateAuthority: PublicKey, mintAuthority: PublicKey, payer: PublicKey, metadata: PublicKey) {
+        self.edition = edition
+        self.mint = mint
+        self.updateAuthority = updateAuthority
+        self.mintAuthority = mintAuthority
+        self.payer = payer
+        self.metadata = metadata
+    }
+    
     let edition: PublicKey
     let mint: PublicKey
     let updateAuthority: PublicKey
     let mintAuthority: PublicKey
     let payer: PublicKey
     let metadata: PublicKey
-    let tokenProgram: PublicKey?
-    let systemProgram: PublicKey?
-    let rent: PublicKey?
+    var tokenProgram: PublicKey?
+    var systemProgram: PublicKey?
+    var rent: PublicKey?
 }
 
 public struct CreateMasterEditionV3InstructionData {
+    public init(maxSupply: UInt64?) {
+        self.maxSupply = maxSupply
+    }
+    
     let maxSupply: UInt64?
 }
 
@@ -29,7 +42,7 @@ public struct CreateMasterEditionV3 {
         static let create: UInt8 = 17
     }
 
-    static func createMasterEditionV3(
+    public static func createMasterEditionV3(
         accounts: CreateMasterEditionV3InstructionAccounts,
         arguments: CreateMasterEditionV3InstructionData,
         programId: PublicKey = TokenMetadataProgram.publicKey

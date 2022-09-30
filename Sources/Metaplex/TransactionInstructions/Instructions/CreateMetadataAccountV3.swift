@@ -9,6 +9,16 @@ import Foundation
 import Solana
 
 public struct CreateMetadataAccountV3InstructionAccounts {
+    public init(metadata: PublicKey, mint: PublicKey, mintAuthority: PublicKey, payer: PublicKey, updateAuthority: PublicKey, systemProgram: PublicKey?, rent: PublicKey?) {
+        self.metadata = metadata
+        self.mint = mint
+        self.mintAuthority = mintAuthority
+        self.payer = payer
+        self.updateAuthority = updateAuthority
+        self.systemProgram = systemProgram
+        self.rent = rent
+    }
+    
     let metadata: PublicKey
     let mint: PublicKey
     let mintAuthority: PublicKey
@@ -16,6 +26,7 @@ public struct CreateMetadataAccountV3InstructionAccounts {
     let updateAuthority: PublicKey
     let systemProgram: PublicKey?
     let rent: PublicKey?
+    
 }
 
 public struct CreateMetadataAccountV3InstructionData: BorshCodable, BufferLayout {
@@ -55,7 +66,7 @@ public struct CreateMetadataAccountV3 {
         static let signMetadata: UInt8 = 7
     }
 
-    static func createMetadataAccountV3Instruction(
+    public static func createMetadataAccountV3Instruction(
         accounts: CreateMetadataAccountV3InstructionAccounts,
         arguments: CreateMetadataAccountV3InstructionData,
         programId: PublicKey = TokenMetadataProgram.publicKey

@@ -114,10 +114,7 @@ extension InstructionBuilder {
                 updateAuthority: metaplex.identity().publicKey,
                 mintAuthority: metaplex.identity().publicKey,
                 payer: metaplex.identity().publicKey,
-                metadata: metadata,
-                tokenProgram: nil,
-                systemProgram: nil,
-                rent: nil
+                metadata: metadata
             ),
             arguments: .init(maxSupply: 1)
         )

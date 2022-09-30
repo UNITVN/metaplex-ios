@@ -9,7 +9,7 @@ import Foundation
 import Solana
 
 public class TokenMetadataProgram {
-    static let publicKey =
+    public static let publicKey =
     PublicKey(string: "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s")!
 
     static func accounts(connection: Connection) -> TokenMetadataGpaBuilder {

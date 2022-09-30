@@ -9,7 +9,7 @@ import Foundation
 import Solana
 
 public struct MetadataAccount: BufferLayout {
-    static func pda(mintKey: PublicKey) -> Result<PublicKey, Error> {
+    public static func pda(mintKey: PublicKey) -> Result<PublicKey, Error> {
         let seedMetadata = [String.metadataPrefix.bytes,
                             TokenMetadataProgram.publicKey.bytes,
                             mintKey.bytes].map { Data($0) }
